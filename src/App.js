@@ -1,15 +1,15 @@
 import './App.css';
 import Alert from './Components/Alert';
-// import About from './Components/About';
+import About from './Components/About';
 import Navbar from './Components/Navbar';
 import TextFrom from './Components/TextFrom';
 import React, {useState} from 'react';
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
 
-// } from "react-router-dom";
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light'); // Whether dark mode is enable or not
@@ -30,7 +30,7 @@ function App() {
       setMode('dark');
       document.body.style.backgroundColor = '#042743';
       showAlert("Dark Mode has been Enable ✅", "success");
-      document.title = "TextUtils - Dark Mode";
+      // document.title = "TextUtils - Dark Mode";
       // setInterval(() => {
       //   document.title = "TextUtils - is Amazing";
       // }, 2000); 
@@ -42,7 +42,7 @@ function App() {
       setMode('light');
       document.body.style.backgroundColor = 'White';
       showAlert("Light Mode has been Enable ✅", "success");
-      document.title = "TextUtils - light Mode";
+      // document.title = "TextUtils - light Mode";
     }
   }
 
@@ -50,21 +50,19 @@ function App() {
     <>
 {/* <Navbar title="Textutils" aboutText="About"/> */}
 {/* <Navbar/>? */}
-{/* <Router> */}
-{/* <Navbar title="TextUtils" aboutText="About" mode={mode} toggleMode={toggleMode}/> */}
-<Navbar title="TextUtils"  mode={mode} toggleMode={toggleMode}/>
+<Router>
+<Navbar title="TextUtils" aboutText="About" mode={mode} toggleMode={toggleMode}/>
+{/* <Navbar title="TextUtils"  mode={mode} toggleMode={toggleMode}/> */}
 <Alert alert={alert}/>
 <div className="container my-3">
-        {/* <Switch>
-          <Route exact path="/"> */}
-          <TextFrom showAlert={showAlert} heading="Enter the text to Analyze" mode={mode}/>
-          {/* </Route>
-          <Route exact path="/about">
-            <About/>
+        <Routes>
+          <Route exact path="/" element={<TextFrom showAlert={showAlert} heading="Texttutils - word counter, character counter,remove extra space" mode={mode}/>}>
           </Route>
-        </Switch> */}
+          <Route exact path="/about" element={<About mode={mode}/>}>
+          </Route>
+        </Routes>
         </div>
-        {/* </Router> */}
+        </Router>
 
    </>
   );

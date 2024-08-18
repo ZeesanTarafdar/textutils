@@ -38,22 +38,22 @@ export default function TextFrom(props) {
   return (
     <>
     <div className="container" style={{color: props.mode==='dark'?'white':'#042743'}}>
-        <h1>{props.heading}</h1>
+        <h1 className='mb-4'>{props.heading}</h1>
         <div className="mb-3">
-        <textarea className="form-control" id="myBox" rows="10"  value={text} onChange={handelOnChange} style={{backgroundColor: props.mode==='dark'?'gray':'white', color: props.mode==='dark'?'white':'#042743'}} placeholder="Enter Your Text"></textarea>
+        <textarea className="form-control" id="myBox" rows="10"  value={text} onChange={handelOnChange} style={{backgroundColor: props.mode==='dark'?'#13466e':'white', color: props.mode==='dark'?'white':'#042743'}} placeholder="Enter Your Text"></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handelUpClick}>Convert to UpperCase</button>
-        <button className="btn btn-primary mx-2" onClick={handelLowClick}>Convert to LowerCase</button>
-        <button className="btn btn-primary mx-2" onClick={handelExtraSpaces}>Remove Extra Space</button>
-        <button className="btn btn-primary mx-2" onClick={handelCopyClick}>Copy Text</button>
-        <button className="btn btn-primary mx-2" onClick={handelClearClick} >Clear Text</button>
+        <button disabled={text.length===0}className="btn btn-primary mx-2 my-1" onClick={handelUpClick}>Convert to UpperCase</button>
+        <button disabled={text.length===0}className="btn btn-primary mx-2 my-1" onClick={handelLowClick}>Convert to LowerCase</button>
+        <button disabled={text.length===0}className="btn btn-primary mx-2 my-1" onClick={handelExtraSpaces}>Remove Extra Space</button>
+        <button disabled={text.length===0}className="btn btn-primary mx-2 my-1" onClick={handelCopyClick}>Copy Text</button>
+        <button disabled={text.length===0}className="btn btn-primary mx-2 my-1" onClick={handelClearClick} >Clear Text</button>
  </div>
  <div className="container my-3" style={{color: props.mode==='dark'?'white':'#042743'}}>
     <h1>Your text Summary</h1>
-    <p>{text.split(" ").length} words and {text.length} characters</p>
-    <p>{0.008 * text.split(" ").length} Minutes read </p>
+    <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+    <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes read </p>
     <h3>Preview</h3>
-    <p>{text.length>0?text:"Enter Somethings in this Above to Preview it here"}</p>
+    <p>{text.length>0?text:"Nothing to Preview!"}</p>
  </div>
  </>
   )
